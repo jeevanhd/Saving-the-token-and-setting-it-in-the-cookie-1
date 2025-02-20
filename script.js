@@ -1,12 +1,19 @@
+const jwt = require("jsonwebtoken");
+
 const encrypt = (payload) => {
-  // encrypt the payload and return token
-}
+  return jwt.sign(payload, "your-secret-key", { expiresIn: "1h" });
+};
 
 const decrypt = (token) => {
-  // return decoded payload
-}
+  try {
+    return jwt.verify(token, "your-secret-key");
+  } catch (err) {
+    console.error("Invalid token:", err);
+    return null;
+  }
+};
 
 module.exports = {
   encrypt,
-  decrypt
-}
+  decrypt,
+};
